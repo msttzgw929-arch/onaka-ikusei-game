@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#2a1640">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💗</text></svg>">
+<title>ふくばら♡ゴッドハンド 〜7つの福腹物語〜</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&family=Zen+Maru+Gothic:wght@500;700;900&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- タイトル -->
+  <section id="title" class="screen active">
+    <div class="title-bg" id="titleBg"></div>
+    <div class="title-glow"></div>
+    <div class="title-inner">
+      <div class="logo-sub">伝説のマッサージ師と7人のOL</div>
+      <h1 class="logo"><span class="l1">ふくばら</span><span class="heart">♡</span><span class="l2">ゴッドハンド</span></h1>
+      <div class="logo-tag">〜 7つの福腹物語 〜</div>
+      <div class="title-menu">
+        <button class="btn big primary" id="btnStart">はじめから</button>
+        <button class="btn big" id="btnContinue">つづきから</button>
+        <div class="row">
+          <button class="btn" id="btnSettingsT">設定</button>
+          <button class="btn" id="btnCreditsT">クレジット</button>
+        </div>
+      </div>
+      <div class="title-foot">タップ・クリックで操作 ／ 音声あり（設定でON/OFF）</div>
+    </div>
+  </section>
+
+  <!-- キャラ選択 -->
+  <section id="select" class="screen">
+    <header class="sel-head">
+      <button class="btn icon" id="btnSelBack" title="タイトルへ">⟵</button>
+      <h2>ヒロインを選ぶ</h2>
+      <div class="pts-pill"><span>福ポイント</span><b id="selPts">0</b></div>
+      <button class="btn icon" id="btnSettingsS" title="設定">⚙</button>
+    </header>
+    <div class="sel-body">
+      <div class="cards" id="cards"></div>
+      <aside class="detail" id="detail">
+        <div class="detail-img"><img id="dImg" alt=""></div>
+        <div class="detail-txt">
+          <div class="d-dept" id="dDept"></div>
+          <h3 id="dName"></h3>
+          <div class="d-kana" id="dKana"></div>
+          <div class="d-tag" id="dTag"></div>
+          <p id="dProfile"></p>
+          <div class="d-wish">🎯 <span id="dWish"></span></div>
+          <div class="d-prog"><div class="bar"><i id="dBar"></i></div><span id="dLv"></span></div>
+          <button class="btn big primary" id="btnGo">マッサージ開始！</button>
+          <div class="d-extra">
+            <button class="btn small" id="btnReplay">回想</button>
+            <button class="btn small" id="btnSong">歌を聴く</button>
+          </div>
+        </div>
+      </aside>
+    </div>
+    <div class="finale-bar" id="finaleBar">
+      <span>全員の福腹が完成！</span><button class="btn primary" id="btnFinale">福腹グランプリへ ▶</button>
+    </div>
+  </section>
+
+  <!-- ゲーム -->
+  <section id="game" class="screen">
+    <header class="g-head">
+      <button class="btn icon" id="btnGBack" title="ヒロイン選択へ">⟵</button>
+      <div class="g-name"><b id="gName"></b><small id="gDept"></small></div>
+      <div class="g-meter">
+        <div class="g-lv"><span id="gLv">Lv.0</span><span id="gWaist">腹囲 92cm</span></div>
+        <div class="bar grow"><i id="gBar"></i><em id="gBarTxt"></em></div>
+      </div>
+      <button class="btn icon" id="btnMute" title="ミュート">🔊</button>
+      <button class="btn icon" id="btnHelp" title="遊び方">？</button>
+      <button class="btn icon" id="btnSettingsG" title="設定">⚙</button>
+    </header>
+    <div class="g-main">
+      <div class="stage" id="stage">
+        <div id="stageBg"></div>
+        <canvas id="gl"></canvas>
+        <canvas id="fx"></canvas>
+        <img id="handL" class="hand" alt="">
+        <img id="handR" class="hand" alt="">
+        <div id="floats"></div>
+        <div class="combo" id="combo"><b id="comboN">0</b><span>COMBO</span><small id="comboM">×1.0</small></div>
+        <div class="stretch-meter" id="stretchMeter"><i></i></div>
+        <div class="mode-sw">
+          <button class="btn mode on" id="modeRub" title="もむ">🤲 もむ</button>
+          <button class="btn mode" id="modePinch" title="つまむ">🤏 つまむ</button>
+        </div>
+        <div class="auto-badge" id="autoBadge">🔄 もみ丸くん稼働中</div>
+      </div>
+      <aside class="panel" id="panel">
+        <button class="panel-tab" id="panelTab">強化ショップ ▲</button>
+        <div class="panel-in">
+          <div class="pts-big"><span>福ポイント</span><b id="gPts">0</b></div>
+          <div class="upgs" id="upgs"></div>
+          <div class="stats" id="stats"></div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ノベルパート -->
+  <section id="vn" class="overlay">
+    <div class="vn-backdrop" id="vnBack"></div>
+    <div class="vn-box" id="vnBox">
+      <div class="vn-name" id="vnName"></div>
+      <div class="vn-text" id="vnText"></div>
+      <div class="vn-next">▼</div>
+      <div class="vn-ctrl">
+        <button class="btn tiny" id="vnAuto">オート</button>
+        <button class="btn tiny" id="vnSkip">スキップ</button>
+      </div>
+    </div>
+    <div class="vn-chapter" id="vnChapter"></div>
+  </section>
+
+  <!-- 歌 -->
+  <section id="song" class="overlay">
+    <div class="song-card">
+      <div class="song-label">♪ ヒロインソング</div>
+      <h3 id="songTitle"></h3>
+      <div class="song-by" id="songBy"></div>
+      <div class="song-lyrics" id="songLyrics"></div>
+      <div class="song-eq"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <button class="btn primary" id="songClose">とじる</button>
+    </div>
+  </section>
+
+  <!-- モーダル -->
+  <section id="modal" class="overlay">
+    <div class="modal-card">
+      <h3 id="mTitle"></h3>
+      <div id="mBody"></div>
+      <div class="m-btns" id="mBtns"></div>
+    </div>
+  </section>
+
+  <div id="toast"></div>
+</div>
+<script src="js/story.js"></script>
+<script src="js/calib.js"></script>
+<script src="js/songs.js"></script>
+<script src="js/game.js"></script>
+</body>
+</html>
